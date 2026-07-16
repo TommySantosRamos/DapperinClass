@@ -27,7 +27,17 @@ namespace DapperinClass
             {
                 Console.WriteLine($"Department ID: {department.DepartmentID}, Name: {department.DepartmentName}");
             }
+            var productRepo = new DapperProductRepository(dbConnection);
 
+            productRepo.CreateProduct("Test Product", 9.99, 1);
+
+            var products = productRepo.GetAllProducts();
+            foreach (var p in products)
+            {
+                Console.WriteLine($"{p.Name} - {p.Price}");
+            }
+            productRepo.UpdateProduct(1, "Updated Product", 12.99, 1);
+            productRepo.DeleteProduct(2);
 
         }
     }
